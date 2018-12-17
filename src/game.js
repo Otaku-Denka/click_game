@@ -28,6 +28,7 @@ function endGame() {
   $('.square').addClass('end');
   $('.score').html('Game Over!<br/>Your final score is: ' + currentScore);
   $('.start-button').css('display', 'block');
+  $('.square').css('display', 'none');
 }
 
 function timerStart() {
