@@ -30,11 +30,17 @@ function endGame() {
   $('.start-button').css('display', 'block');
   $('.square').css('display', 'none');
   $('.action-bar').css('display', 'none');
+  
+  started = false;
 }
 
 function timerStart() {
+  currentTimer = 60
+  currentScore = 0
+  $('.score').html(currentScore);
   for (var i = 0; i <= 5; i++) {
     moveSquare($('#square' + i));
+    $('.square').css('display', 'block');
   }
   timer = setInterval(function() {
     currentTimer--;
