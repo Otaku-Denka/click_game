@@ -1,0 +1,80 @@
+body {
+  padding: 0px;
+  margin: 0px; }
+
+.game {
+  width: 100vw;
+  height: 100vh;
+  background: blue;
+  color: #ffffff;
+  position: relative; }
+  .game .start-button {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    cursor: pointer; }
+  .game .square {
+    border: 5px solid #000;
+    width: 150px;
+    height: 150px;
+    background: green;
+    position: absolute;
+    display: none; }
+    .game .square .closeBtn {
+      position: absolute;
+      color: #ffffff;
+      top: 10px;
+      right: 10px;
+      width: 20px;
+      height: 20px;
+      cursor: pointer; }
+    .game .square .end {
+      pointer-events: none; }
+  .game .action-bar {
+    position: fixed;
+    top: 30%;
+    left: 10%;
+    z-index: 1000;
+    opacity: 0;
+    -webkit-transition: all 0.5s ease-out;
+    -o-transition: all 0.5s ease-out;
+    transition: all 0.5s ease-out; }
+  .game .meter {
+    border: 2px solid grey;
+    border-top-color: grey;
+    border-left-color: lightgrey;
+    border-right-color: lightgrey;
+    border-bottom-color: darkgrey;
+    position: relative;
+    height: 200px;
+    width: 50px;
+    background: -webkit-gradient(linear, left top, left bottom, from(#a90329), color-stop(44%, #8f0222), to(#6d0019));
+    background: -webkit-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%);
+    background: -o-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%);
+    background: linear-gradient(to bottom, #a90329 0%, #8f0222 44%, #6d0019 100%); }
+  .game .meter__filler {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: -webkit-gradient(linear, left top, left bottom, from(#398235), color-stop(56%, #8ab66b), to(#c9de96));
+    background: -webkit-linear-gradient(top, #398235 0%, #8ab66b 56%, #c9de96 100%);
+    background: -o-linear-gradient(top, #398235 0%, #8ab66b 56%, #c9de96 100%);
+    background: linear-gradient(to bottom, #398235 0%, #8ab66b 56%, #c9de96 100%);
+    height: 0%;
+    width: 50px; }
+
+@-webkit-keyframes shaking {
+  0% {
+    -webkit-transform: rotate(-0.5deg) translate(-1px, 0px);
+            transform: rotate(-0.5deg) translate(-1px, 0px); }
+  100% {
+    -webkit-transform: rotate(0.5deg) translate(1px, 0px);
+            transform: rotate(0.5deg) translate(1px, 0px); } }
+
+@keyframes shaking {
+  0% {
+    -webkit-transform: rotate(-0.5deg) translate(-1px, 0px);
+            transform: rotate(-0.5deg) translate(-1px, 0px); }
+  100% {
+    -webkit-transform: rotate(0.5deg) translate(1px, 0px);
+            transform: rotate(0.5deg) translate(1px, 0px); } }

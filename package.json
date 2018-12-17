@@ -1,0 +1,21 @@
+{
+    "name": "click-game",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "autoprefixer": "^9.4.3",
+        "gulp": "^3.9.1",
+        "gulp-postcss": "^8.0.0",
+        "gulp-sass": "^4.0.2",
+        "lost": "^8.3.0",
+        "postcss-custom-media": "^7.0.7",
+        "rucksack-css": "^1.0.2"
+    }
+}

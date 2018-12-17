@@ -1,0 +1,74 @@
+body {
+    padding: 0px;
+    margin: 0px;
+}
+
+.game {
+    width: 100vw;
+    height: 100vh;
+    background: blue;
+    color: #ffffff;
+    position: relative;
+    .start-button {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        cursor: pointer;
+    }
+    .square {
+        border: 5px solid #000;
+        width: 150px;
+        height: 150px;
+        background: green;
+        position: absolute;
+        display: none;
+        .closeBtn {
+            position: absolute;
+            color: #ffffff;
+            top: 10px;
+            right: 10px;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .end {
+            pointer-events: none;
+        }
+    }
+    .action-bar {
+        position: fixed;
+        top: 30%;
+        left: 10%;
+        z-index: 1000;
+        opacity: 0;
+        transition: all 0.5s ease-out;
+    }
+    .meter {
+        border: 2px solid grey;
+        border-top-color: grey;
+        border-left-color: lightgrey;
+        border-right-color: lightgrey;
+        border-bottom-color: darkgrey;
+        position: relative;
+        height: 200px;
+        width: 50px;
+        background: linear-gradient( to bottom, #a90329 0%, #8f0222 44%, #6d0019 100%);
+    }
+    .meter__filler {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        background: linear-gradient( to bottom, #398235 0%, #8ab66b 56%, #c9de96 100%);
+        height: 0%;
+        width: 50px;
+    }
+}
+
+@keyframes shaking {
+    0% {
+        transform: rotate(-0.5deg) translate(-1px, 0px);
+    }
+    100% {
+        transform: rotate(0.5deg) translate(1px, 0px);
+    }
+}
