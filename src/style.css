@@ -13,10 +13,6 @@ body {
     left: 50%;
     top: 50%;
     cursor: pointer; }
-  #game.toggle {
-    background-image: url("http://i1.bangqu.com/r2/news/20171107/3048645a76636c53385a.jpg");
-    background-repeat: no-repeat;
-    background-size: cover; }
   #game .square {
     border: 5px solid #000;
     width: 150px;

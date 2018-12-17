@@ -53,15 +53,7 @@ function timerStart() {
 }
 
 $('.closeBtn').click(function() {
-  if (currentScore === 20) {
-   
-    $('#game').toggleClass('toggle');
-    incrementScore();
-  }else if (currentScore === 21) {
-    $('#game').toggleClass('toggle');
-    incrementScore();
-  } 
-  else if (currentScore === 9) {
+   if (currentScore === 10) {
     // incrementScore();
     $('.square').css('display', 'none');
     $('#square1')
