@@ -55,6 +55,7 @@ $('.closeBtn').click(function() {
       .css('height', 50 + 'vw')
       .css('width', 50 + 'vw');
     $('.action-bar').css('opacity', '1');
+    $('.action-bar').css('display', 'block');
     onBodyClick();
     document.addEventListener('barFull', onBarFullHandler);
     createjs.Ticker.addEventListener('tick', handleTick);
@@ -77,6 +78,7 @@ var currentLevel = 0.5;
 
 function onBarFullHandler() {
   $('.action-bar').css('opacity', '0');
+  $('.action-bar').css('display', 'none');
   incrementScore();
   for (var i = 0; i <= 5; i++) {
     moveSquare($('#square' + i));
@@ -86,7 +88,6 @@ function onBarFullHandler() {
 
 function handleTick(ev) {
   if (!ev.paused) {
-    
     setCurrentMeter(getCurrentMeter() - (1 + currentLevel * 0.4));
   }
 }
