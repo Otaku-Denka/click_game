@@ -22,6 +22,9 @@ body {
         background: green;
         position: absolute;
         display: none;
+        &.shaking {
+            animation: shaking 100ms infinite linear alternate;
+        }
         .closeBtn {
             position: absolute;
             color: #ffffff;

@@ -100,12 +100,12 @@ function setCurrentMeter(value) {
   newHeight = value > 100 ? 100 : value < 0 ? 0 : value;
 
   if (newHeight <= 5) {
-    document.querySelector('.square').classList.remove('shaking');
+    document.querySelector('#square1').classList.remove('shaking');
   } else {
-    document.querySelector('.square').classList.add('shaking');
+    document.querySelector('#square1').classList.add('shaking');
   }
   if (newHeight >= 100) {
-    document.querySelector('.square').classList.remove('shaking');
+    document.querySelector('#square1').classList.remove('shaking');
     document.dispatchEvent(new Event('barFull'));
   }
   document.querySelector('.meter__filler').style.height = newHeight + '%';

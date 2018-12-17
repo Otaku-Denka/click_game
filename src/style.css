@@ -20,6 +20,9 @@ body {
     background: green;
     position: absolute;
     display: none; }
+    .game .square.shaking {
+      -webkit-animation: shaking 100ms infinite linear alternate;
+              animation: shaking 100ms infinite linear alternate; }
     .game .square .closeBtn {
       position: absolute;
       color: #ffffff;
