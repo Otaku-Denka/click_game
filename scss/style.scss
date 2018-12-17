@@ -3,7 +3,7 @@ body {
     margin: 0px;
 }
 
-.game {
+#game {
     width: 100vw;
     height: 100vh;
     background: blue;
@@ -14,6 +14,11 @@ body {
         left: 50%;
         top: 50%;
         cursor: pointer;
+    }
+    &.toggle {
+        background-image: url('http://i1.bangqu.com/r2/news/20171107/3048645a76636c53385a.jpg');
+        background-repeat: no-repeat;
+        background-size: cover;
     }
     .square {
         border: 5px solid #000;

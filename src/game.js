@@ -30,13 +30,13 @@ function endGame() {
   $('.start-button').css('display', 'block');
   $('.square').css('display', 'none');
   $('.action-bar').css('display', 'none');
-  
+
   started = false;
 }
 
 function timerStart() {
-  currentTimer = 60
-  currentScore = 0
+  currentTimer = 60;
+  currentScore = 0;
   $('.score').html(currentScore);
   for (var i = 0; i <= 5; i++) {
     moveSquare($('#square' + i));
@@ -53,7 +53,15 @@ function timerStart() {
 }
 
 $('.closeBtn').click(function() {
-  if (currentScore === 9) {
+  if (currentScore === 20) {
+   
+    $('#game').toggleClass('toggle');
+    incrementScore();
+  }else if (currentScore === 21) {
+    $('#game').toggleClass('toggle');
+    incrementScore();
+  } 
+  else if (currentScore === 9) {
     // incrementScore();
     $('.square').css('display', 'none');
     $('#square1')
@@ -70,6 +78,7 @@ $('.closeBtn').click(function() {
   } else {
     incrementScore();
     moveSquare($(this).closest('.square'));
+   
   }
 });
 

@@ -2,28 +2,32 @@ body {
   padding: 0px;
   margin: 0px; }
 
-.game {
+#game {
   width: 100vw;
   height: 100vh;
   background: blue;
   color: #ffffff;
   position: relative; }
-  .game .start-button {
+  #game .start-button {
     position: absolute;
     left: 50%;
     top: 50%;
     cursor: pointer; }
-  .game .square {
+  #game.toggle {
+    background-image: url("http://i1.bangqu.com/r2/news/20171107/3048645a76636c53385a.jpg");
+    background-repeat: no-repeat;
+    background-size: cover; }
+  #game .square {
     border: 5px solid #000;
     width: 150px;
     height: 150px;
     background: green;
     position: absolute;
     display: none; }
-    .game .square.shaking {
+    #game .square.shaking {
       -webkit-animation: shaking 100ms infinite linear alternate;
               animation: shaking 100ms infinite linear alternate; }
-    .game .square .closeBtn {
+    #game .square .closeBtn {
       position: absolute;
       color: #ffffff;
       top: 10px;
@@ -31,9 +35,9 @@ body {
       width: 20px;
       height: 20px;
       cursor: pointer; }
-    .game .square .end {
+    #game .square .end {
       pointer-events: none; }
-  .game .action-bar {
+  #game .action-bar {
     position: fixed;
     top: 30%;
     left: 10%;
@@ -43,7 +47,7 @@ body {
     -webkit-transition: all 0.5s ease-out;
     -o-transition: all 0.5s ease-out;
     transition: all 0.5s ease-out; }
-  .game .meter {
+  #game .meter {
     border: 2px solid grey;
     border-top-color: grey;
     border-left-color: lightgrey;
@@ -56,7 +60,7 @@ body {
     background: -webkit-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%);
     background: -o-linear-gradient(top, #a90329 0%, #8f0222 44%, #6d0019 100%);
     background: linear-gradient(to bottom, #a90329 0%, #8f0222 44%, #6d0019 100%); }
-  .game .meter__filler {
+  #game .meter__filler {
     position: absolute;
     bottom: 0;
     left: 0;
