@@ -1,3 +1,6 @@
+var meterPercFilled = 0;
+var currentLevel = 0.5;
+
 var currentScore = $('.score').text(),
   currentTimer = $('.timer').text(),
   started = false,
@@ -37,6 +40,8 @@ function endGame() {
 function timerStart() {
   currentTimer = 60;
   currentScore = 0;
+  meterPercFilled = 0
+  createjs.Ticker.paused = false;
   $('.score').html(currentScore);
   for (var i = 0; i <= 5; i++) {
     moveSquare($('#square' + i));
@@ -82,8 +87,7 @@ $('.start-button').click(function() {
   }
 });
 
-var meterPercFilled = 0;
-var currentLevel = 0.5;
+
 
 function onBarFullHandler() {
   $('.action-bar').css('opacity', '0');
