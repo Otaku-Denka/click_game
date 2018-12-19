@@ -1,6 +1,7 @@
 var meterPercFilled = 0;
-var currentLevel = 0.1;
-var num = 40;
+var currentLevel = 0.5;
+var num = 80;
+var first = false;
 var currentScore = $('.score').text(),
   currentTimer = $('.timer').text(),
   started = false,
@@ -28,6 +29,10 @@ function moveSquare(selection) {
  
   var position = containHeight - ($(selection).position().top + $(selection).outerHeight(true))
   $(selection).removeClass('scaleIn');
+  if(started === false){
+    $(selection).finish()
+    $(selection).css('display', display);
+  }
     if(currentScore > 10){
       if(position > 1){
         $(selection).finish()
@@ -77,7 +82,11 @@ function endGame() {
   $('.square').css('display', 'none');
   $('.action-bar').css('display', 'none');
   for(var i=0; i<= num; i++){
+    $('#square'+i).finish()
     $('#square'+i).css('display', 'none')
+    $('#square'+i).remove()
+
+    // moveSquare('#square'+i)
   }
 
   started = false;
@@ -87,8 +96,10 @@ function timerStart() {
   currentTimer = 60;
   currentScore = 0;
   meterPercFilled = 0;
+  
   createjs.Ticker.paused = false;
   $('.score').html(currentScore);
+
   for (var i = 0; i <= num; i++) {
     (function(i) {
       setTimeout(function() {
@@ -104,9 +115,10 @@ function timerStart() {
     // $('.square').css('display', 'block');
   }
   // $('.closeBtn').click(function() {
+    if(first === false){
     $('.square').click(function() {
     if (currentScore === 10) {
-      // incrementScore();
+     
       $('.square').css('display', 'none');
       $('#square1')
         .css('display', 'block')
@@ -129,7 +141,10 @@ function timerStart() {
       moveSquare($(this))
       // moveSquare($(this).closest('.square'));
     }
+    
   });
+}
+  first = true
   timer = setInterval(function() {
     currentTimer--;
     $('.timer').html(currentTimer);
