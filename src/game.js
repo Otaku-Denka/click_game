@@ -93,8 +93,8 @@ function timerStart() {
         .css('display', 'block')
         .css('left', 25 + '%')
         .css('bottom', 10 + 'px')
-        .css('height', 50 + 'vw')
-        .css('width', 50 + 'vw');
+        .css('height', 40 + 'vw')
+        .css('width', 40 + 'vw');
       $('.action-bar').css('opacity', '1');
       $('.action-bar').css('display', 'block');
       onBodyClick();
