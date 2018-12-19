@@ -2,6 +2,7 @@ var meterPercFilled = 0;
 var currentLevel = 0.5;
 var num = 80;
 var first = false;
+var timeoutFunctionArr = {};
 var currentScore = $('.score').text(),
   currentTimer = $('.timer').text(),
   started = false,
@@ -17,6 +18,8 @@ function incrementScore() {
 }
 
 function moveSquare(selection) {
+  var id =$(selection).attr('id')
+  
   var random = Math.random()
   var display = started ? 'block' : 'none'
   var size = +randomIntFromInterval(100, 200),
@@ -33,7 +36,7 @@ function moveSquare(selection) {
     $(selection).finish()
     $(selection).css('display', display);
   }
-    if(currentScore > 10){
+    if(currentScore > 20){
       if(position > 1){
         $(selection).finish()
         $(selection)
@@ -58,8 +61,13 @@ function moveSquare(selection) {
         Math.floor(random * 15000) + 1000,
       );
       if(started === true){
-        setTimeout(function(){moveSquare(selection)}, Math.floor(random * 15000) + 1000 )
-          
+        
+        function timeoutFunc(){
+        timeoutFunctionArr[id] = setTimeout(function(){
+          moveSquare(selection)
+        }, Math.floor(random * 15000) + 1000 )
+      }
+      timeoutFunc()
       }
  
     } else {
@@ -82,10 +90,11 @@ function endGame() {
   $('.square').css('display', 'none');
   $('.action-bar').css('display', 'none');
   for(var i=0; i<= num; i++){
+    clearTimeout(timeoutFunctionArr['square'+i])
     $('#square'+i).finish()
     $('#square'+i).css('display', 'none')
     $('#square'+i).remove()
-
+    
     // moveSquare('#square'+i)
   }
 
@@ -115,9 +124,9 @@ function timerStart() {
     // $('.square').css('display', 'block');
   }
   // $('.closeBtn').click(function() {
-    if(first === false){
+   
     $('.square').click(function() {
-    if (currentScore === 10) {
+    if (currentScore === 20) {
      
       $('.square').css('display', 'none');
       $('#square1')
@@ -131,7 +140,7 @@ function timerStart() {
       onBodyClick();
       document.addEventListener('barFull', onBarFullHandler);
       createjs.Ticker.addEventListener('tick', handleTick);
-    } else if (currentScore > 10) {
+    } else if (currentScore > 20) {
       incrementScore();
       moveSquare($(this))
       // moveSquare($(this).closest('.square'));
@@ -143,7 +152,7 @@ function timerStart() {
     }
     
   });
-}
+
   first = true
   timer = setInterval(function() {
     currentTimer--;
@@ -203,7 +212,7 @@ function getCurrentMeter() {
 
 function setCurrentMeter(value) {
   newHeight = value > 100 ? 100 : value < 0 ? 0 : value;
-
+  if(document.querySelector('#square1')){
   if (newHeight <= 5) {
     document.querySelector('#square1').classList.remove('shaking');
     document.querySelector('#square1').classList.remove('scaleIn');
@@ -217,6 +226,7 @@ function setCurrentMeter(value) {
     document.dispatchEvent(new Event('barFull'));
     $('#square1').css('bottom', '-210px')
   }
+}
   document.querySelector('.meter__filler').style.height = newHeight + '%';
   return (meterPercFilled = newHeight);
 }
