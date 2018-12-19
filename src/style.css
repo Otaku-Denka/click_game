@@ -7,12 +7,15 @@ body {
   height: 100vh;
   background: blue;
   color: #ffffff;
-  position: relative; }
+  position: relative;
+  overflow: hidden; }
   #game .start-button {
     position: absolute;
     left: 50%;
     top: 50%;
     cursor: pointer; }
+  #game .bottom {
+    bottom: -210px; }
   #game .square {
     border: 5px solid #000;
     width: 150px;
@@ -23,6 +26,12 @@ body {
     #game .square.shaking {
       -webkit-animation: shaking 100ms infinite linear alternate;
               animation: shaking 100ms infinite linear alternate; }
+    #game .square.scaleIn {
+      -webkit-animation: scaleIn 300ms 1 ease-in-out alternate;
+              animation: scaleIn 300ms 1 ease-in-out alternate; }
+    #game .square.scaleOut {
+      -webkit-animation: scaleOut 300ms 1 ease-in-out alternate;
+              animation: scaleOut 300ms 1 ease-in-out alternate; }
     #game .square .closeBtn {
       position: absolute;
       color: #ffffff;
@@ -82,3 +91,35 @@ body {
   100% {
     -webkit-transform: rotate(0.5deg) translate(1px, 0px);
             transform: rotate(0.5deg) translate(1px, 0px); } }
+
+@-webkit-keyframes scaleIn {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes scaleIn {
+  0% {
+    -webkit-transform: scale(0);
+            transform: scale(0); }
+  100% {
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@-webkit-keyframes scaleOut {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); } }
+
+@keyframes scaleOut {
+  0% {
+    -webkit-transform: scale(1);
+            transform: scale(1); }
+  100% {
+    -webkit-transform: scale(0);
+            transform: scale(0); } }

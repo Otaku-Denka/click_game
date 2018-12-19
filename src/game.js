@@ -1,6 +1,6 @@
 var meterPercFilled = 0;
-var currentLevel = 0.5;
-
+var currentLevel = 0.1;
+var num = 40;
 var currentScore = $('.score').text(),
   currentTimer = $('.timer').text(),
   started = false,
@@ -16,15 +16,42 @@ function incrementScore() {
 }
 
 function moveSquare(selection) {
-  var left = randomIntFromInterval(2, 75),
-    top = randomIntFromInterval(2, 75),
-    size = randomIntFromInterval(100, 200);
-  $(selection)
-    .css('left', left + '%')
-    .css('top', top + '%')
-    .css('height', size + 'px')
-    .css('width', size + 'px')
-    .css('display', 'block');
+  var size = +randomIntFromInterval(100, 200),
+    containWidth = $('#game').width(),
+    containHeight = $('#game').height(),
+    right = Math.floor((containWidth / 100) * (Math.random() * 100) - size),
+    bottom = Math.floor((containHeight / 100) * (Math.random() * 100) - size -10) ;
+  right = right <= size ? size + 20 : right;
+  bottom = bottom <= size ? 20 : bottom;
+  $(selection).removeClass('scaleIn');
+    if(currentScore > 10){
+      $(selection)
+      .css('right', right + 'px')
+      .css('height', size + 'px')
+      .css('width', size + 'px')
+      .css('bottom', '-210' + 'px')
+      .css('bottom', 'none')
+      .css('display', 'block');
+      $(selection).removeClass('scaleIn')
+      $(selection).addClass('bottom')
+      $(selection).animate(
+        {
+          bottom: containHeight + size + 20,
+        },
+        Math.floor(Math.random() * 15000) + 1000,
+      );
+
+    } else {
+      setTimeout(function() {
+        $(selection)
+          .css('right', right + 'px')
+          .css('bottom', bottom + 'px')
+          .css('height', size + 'px')
+          .css('width', size + 'px')
+          .css('display', 'block');
+        $(selection).addClass('scaleIn');
+      }, 300);
+    }
 }
 
 function endGame() {
@@ -40,13 +67,49 @@ function endGame() {
 function timerStart() {
   currentTimer = 60;
   currentScore = 0;
-  meterPercFilled = 0
+  meterPercFilled = 0;
   createjs.Ticker.paused = false;
   $('.score').html(currentScore);
-  for (var i = 0; i <= 5; i++) {
-    moveSquare($('#square' + i));
-    $('.square').css('display', 'block');
+  for (var i = 0; i <= num; i++) {
+    (function(i) {
+      setTimeout(function() {
+        
+        moveSquare($('#square' + i));
+      }, Math.floor(Math.random() * 20000 - 15000) );
+    })(i);
+    $('#game').append(
+      '<div class="square bottom" id="square' +
+        i +
+        '"><div class="closeBtn">X</div></div>',
+    )
+    // $('.square').css('display', 'block');
   }
+  $('.closeBtn').click(function() {
+  
+    if (currentScore === 10) {
+      // incrementScore();
+      $('.square').css('display', 'none');
+      $('#square1')
+        .css('display', 'block')
+        .css('left', 25 + '%')
+        .css('bottom', 10 + 'px')
+        .css('height', 50 + 'vw')
+        .css('width', 50 + 'vw');
+      $('.action-bar').css('opacity', '1');
+      $('.action-bar').css('display', 'block');
+      onBodyClick();
+      document.addEventListener('barFull', onBarFullHandler);
+      createjs.Ticker.addEventListener('tick', handleTick);
+    } else if (currentScore > 10) {
+      incrementScore();
+     
+      moveSquare($(this).closest('.square'));
+      // $(this).closest('.square').css('display','none')
+    } else {
+      incrementScore();
+      moveSquare($(this).closest('.square'));
+    }
+  });
   timer = setInterval(function() {
     currentTimer--;
     $('.timer').html(currentTimer);
@@ -57,27 +120,7 @@ function timerStart() {
   }, 1000);
 }
 
-$('.closeBtn').click(function() {
-   if (currentScore === 10) {
-    // incrementScore();
-    $('.square').css('display', 'none');
-    $('#square1')
-      .css('display', 'block')
-      .css('left', 25 + '%')
-      .css('top', 10 + '%')
-      .css('height', 50 + 'vw')
-      .css('width', 50 + 'vw');
-    $('.action-bar').css('opacity', '1');
-    $('.action-bar').css('display', 'block');
-    onBodyClick();
-    document.addEventListener('barFull', onBarFullHandler);
-    createjs.Ticker.addEventListener('tick', handleTick);
-  } else {
-    incrementScore();
-    moveSquare($(this).closest('.square'));
-   
-  }
-});
+
 
 $('.start-button').click(function() {
   $(this).css('display', 'none');
@@ -87,15 +130,29 @@ $('.start-button').click(function() {
   }
 });
 
-
-
 function onBarFullHandler() {
   $('.action-bar').css('opacity', '0');
   $('.action-bar').css('display', 'none');
   incrementScore();
-  for (var i = 0; i <= 5; i++) {
-    moveSquare($('#square' + i));
+  $('.square').css('display', 'block');
+  for(var l=0; l<=num; l++){
+    $('#square' + l).css('bottom', '-210px')
   }
+  setTimeout(function(){
+    for(var i=0; i<=num ; i++){
+    
+      (function(i) {
+        setTimeout(function() {
+          moveSquare('#square' + i)
+        }, Math.floor(Math.random() * 20000 - 15000) );
+      })(i);
+      
+    }
+  }, 300);
+
+  // for (var i = 0; i <= 5; i++) {
+  //   moveSquare($('#square' + i));
+  // }
   createjs.Ticker.paused = true;
 }
 
@@ -114,12 +171,16 @@ function setCurrentMeter(value) {
 
   if (newHeight <= 5) {
     document.querySelector('#square1').classList.remove('shaking');
+    document.querySelector('#square1').classList.remove('scaleIn');
   } else {
+    document.querySelector('#square1').classList.remove('scaleIn');
     document.querySelector('#square1').classList.add('shaking');
   }
   if (newHeight >= 100) {
     document.querySelector('#square1').classList.remove('shaking');
+    document.querySelector('#square1').classList.remove('scaleIn');
     document.dispatchEvent(new Event('barFull'));
+    $('#square1').css('bottom', '-210px')
   }
   document.querySelector('.meter__filler').style.height = newHeight + '%';
   return (meterPercFilled = newHeight);

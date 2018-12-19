@@ -9,11 +9,15 @@ body {
     background: blue;
     color: #ffffff;
     position: relative;
+    overflow: hidden;
     .start-button {
         position: absolute;
         left: 50%;
         top: 50%;
         cursor: pointer;
+    }
+    .bottom {
+        bottom: -210px;
     }
     .square {
         border: 5px solid #000;
@@ -24,6 +28,12 @@ body {
         display: none;
         &.shaking {
             animation: shaking 100ms infinite linear alternate;
+        }
+        &.scaleIn {
+            animation: scaleIn 300ms 1 ease-in-out alternate;
+        }
+        &.scaleOut {
+            animation: scaleOut 300ms 1 ease-in-out alternate;
         }
         .closeBtn {
             position: absolute;
@@ -74,5 +84,23 @@ body {
     }
     100% {
         transform: rotate(0.5deg) translate(1px, 0px);
+    }
+}
+
+@keyframes scaleIn {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes scaleOut {
+    0% {
+        transform: scale(1);
+    }
+    100% {
+        transform: scale(0);
     }
 }
