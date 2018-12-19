@@ -16,6 +16,8 @@ function incrementScore() {
 }
 
 function moveSquare(selection) {
+  var random = Math.random()
+  var display = started ? 'block' : 'none'
   var size = +randomIntFromInterval(100, 200),
     containWidth = $('#game').width(),
     containHeight = $('#game').height(),
@@ -23,24 +25,38 @@ function moveSquare(selection) {
     bottom = Math.floor((containHeight / 100) * (Math.random() * 100) - size -10) ;
   right = right <= size ? size + 20 : right;
   bottom = bottom <= size ? 20 : bottom;
+ 
+  var position = containHeight - ($(selection).position().top + $(selection).outerHeight(true))
   $(selection).removeClass('scaleIn');
     if(currentScore > 10){
+      if(position > 1){
+        $(selection).finish()
+        $(selection)
+      .css('right', right + 'px')
+      .css('height', size + 'px')
+      .css('width', size + 'px')
+      .css('bottom', '-210' + 'px')
+      }
+    
       $(selection)
       .css('right', right + 'px')
       .css('height', size + 'px')
       .css('width', size + 'px')
       .css('bottom', '-210' + 'px')
-      .css('bottom', 'none')
-      .css('display', 'block');
+      .css('display', display);
       $(selection).removeClass('scaleIn')
       $(selection).addClass('bottom')
       $(selection).animate(
         {
           bottom: containHeight + size + 20,
         },
-        Math.floor(Math.random() * 15000) + 1000,
+        Math.floor(random * 15000) + 1000,
       );
-
+      if(started === true){
+        setTimeout(function(){moveSquare(selection)}, Math.floor(random * 15000) + 1000 )
+          
+      }
+ 
     } else {
       setTimeout(function() {
         $(selection)
@@ -48,7 +64,7 @@ function moveSquare(selection) {
           .css('bottom', bottom + 'px')
           .css('height', size + 'px')
           .css('width', size + 'px')
-          .css('display', 'block');
+          .css('display', display);
         $(selection).addClass('scaleIn');
       }, 300);
     }
@@ -60,6 +76,9 @@ function endGame() {
   $('.start-button').css('display', 'block');
   $('.square').css('display', 'none');
   $('.action-bar').css('display', 'none');
+  for(var i=0; i<= num; i++){
+    $('#square'+i).css('display', 'none')
+  }
 
   started = false;
 }
@@ -75,7 +94,7 @@ function timerStart() {
       setTimeout(function() {
         
         moveSquare($('#square' + i));
-      }, Math.floor(Math.random() * 20000 - 15000) );
+      }, Math.floor(Math.random() * currentTimer - 15000) );
     })(i);
     $('#game').append(
       '<div class="square bottom" id="square' +
@@ -84,8 +103,8 @@ function timerStart() {
     )
     // $('.square').css('display', 'block');
   }
-  $('.closeBtn').click(function() {
-  
+  // $('.closeBtn').click(function() {
+    $('.square').click(function() {
     if (currentScore === 10) {
       // incrementScore();
       $('.square').css('display', 'none');
@@ -102,12 +121,13 @@ function timerStart() {
       createjs.Ticker.addEventListener('tick', handleTick);
     } else if (currentScore > 10) {
       incrementScore();
-     
-      moveSquare($(this).closest('.square'));
+      moveSquare($(this))
+      // moveSquare($(this).closest('.square'));
       // $(this).closest('.square').css('display','none')
     } else {
       incrementScore();
-      moveSquare($(this).closest('.square'));
+      moveSquare($(this))
+      // moveSquare($(this).closest('.square'));
     }
   });
   timer = setInterval(function() {
@@ -144,7 +164,7 @@ function onBarFullHandler() {
       (function(i) {
         setTimeout(function() {
           moveSquare('#square' + i)
-        }, Math.floor(Math.random() * 20000 - 15000) );
+        }, Math.floor(Math.random() * currentTimer - 15000) );
       })(i);
       
     }
