@@ -29,8 +29,8 @@ function moveSquare(selection) {
     bottom = Math.floor((containHeight / 100) * (Math.random() * 100) - size -10) ;
   right = right <= size ? size + 20 : right;
   bottom = bottom <= size ? 20 : bottom;
- 
-  var position = containHeight - ($(selection).position().top + $(selection).outerHeight(true))
+  var position 
+  position = $(selection).position() ? containHeight - ($(selection).position().top + $(selection).outerHeight(true)) : 0
   $(selection).removeClass('scaleIn');
   if(started === false){
     $(selection).finish()
